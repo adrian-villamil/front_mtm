@@ -6,12 +6,12 @@ import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
 
 const edit = null
-export const ModalEdit = ({ selectedPaciente, actualizar }) => {
+export const ModalEdit = ({ selectedPadrino, actualizar }) => {
   let data = {}
 
-  if (selectedPaciente != null) {
+  if (selectedPadrino != null) {
     // console.log(paciente)
-    data = selectedPaciente
+    data = selectedPadrino
     console.log(data)
   }
 
@@ -24,7 +24,7 @@ export const ModalEdit = ({ selectedPaciente, actualizar }) => {
     onSubmit: (formValue) => {
       console.log("Datos enviados");
       const fetchData = async () => {
-        const response = await fetch(`${BASE_API}/api/paciente/${data.id}/`, { method: 'PATCH', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${TOKEN}` }, body: JSON.stringify(formValue) });
+        const response = await fetch(`${BASE_API}/api/padrino/${data.id}/`, { method: 'PATCH', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${TOKEN}` }, body: JSON.stringify(formValue) });
         const jsonData = await response.json();
         console.log(jsonData)
       };
@@ -53,52 +53,56 @@ export const ModalEdit = ({ selectedPaciente, actualizar }) => {
         <div className="mb-3">
           <label className="form-label">Nombre</label>
           <input type="text" className="form-control" aria-describedby="emailHelp" value={formik.values.nombre}
-            onChange={formik.handleChange} name='nombre' error={formik.errors.nombre} placeholder={data.nombre} />
+            onChange={formik.handleChange} name='nombre' error={formik.errors.nombre} />
 
         </div>
         <div className="mb-3">
           <label className="form-label">Apellido</label>
-          <input type="text" className="form-control"
-            onChange={formik.handleChange} name='apellido' error={formik.errors.apellido} placeholder={data.apellido} />
+          <input type="text" className="form-control" value={formik.values.apellido}
+            onChange={formik.handleChange} name='apellido' error={formik.errors.apellido} />
         </div>
 
         <div className="mb-3">
-          <label className="form-label">Nui</label>
-          <input type="number" className="form-control" value={formik.values.nui}
-            onChange={formik.handleChange} name='nui' error={formik.errors.nui} placeholder={data.nui} />
+          <label className="form-label">Tipo de persona</label>
+          <input type="text" className="form-control" value={formik.values.tipo_persona}
+            onChange={formik.handleChange} name='tipo_persona' error={formik.errors.tipo_persona} />
         </div>
         <div className="mb-3">
-          <label className="form-label">fecha_inicio_tratamiento</label>
-          <input type="date" className="form-control" value={formik.fecha_inicio_tratamiento}
-            onChange={formik.handleChange} name='fecha_inicio_tratamiento' error={formik.fecha_inicio_tratamiento} placeholder={data.fecha_inicio_tratamiento} />
+          <label className="form-label">Estrato</label>
+          <input type="number" className="form-control" value={formik.values.estrato}
+            onChange={formik.handleChange} name='estrato' error={formik.errors.estrato} />
         </div>
         <div className="mb-3">
-          <label className="form-label">Fecha de ingreso</label>
-          <input type="date" className="form-control" value={formik.values.fecha_ingreso}
-            onChange={formik.handleChange} name='fecha_ingreso' error={formik.errors.fecha_ingreso} placeholder={data.fecha_ingreso} />
+          <label className="form-label">Fecha de nacimiento</label>
+          <input type="date" className="form-control" value={formik.values.fecha_nacimiento}
+            onChange={formik.handleChange} name='fecha_nacimiento' error={formik.errors.fecha_nacimiento} />
         </div>
 
         <div className="mb-3">
-          <label className="form-label">Seguro funebre</label>
-          <input type="text" className="form-control" value={formik.values.seguro_funebre}
-            onChange={formik.handleChange} name='seguro_funebre' error={formik.errors.seguro_funebre} placeholder={data.seguro_funebre} />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Telefono</label>
+          <label className="form-label">Teléfono</label>
           <input type="number" className="form-control" value={formik.values.telefono}
-            onChange={formik.handleChange} name='telefono' error={formik.errors.telefono} placeholder={data.telefono} />
+            onChange={formik.handleChange} name='telefono' error={formik.errors.telefono} />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Direccion</label>
+          <input type="text" className="form-control" value={formik.values.direccion}
+            onChange={formik.handleChange} name='direccion' error={formik.errors.direccion} />
         </div>
         <div className="mb-3">
           <label className="form-label">Correo</label>
           <input type="email" className="form-control" value={formik.values.correo}
-            onChange={formik.handleChange} name='correo' error={formik.errors.correo} placeholder={data.correo} />
+            onChange={formik.handleChange} name='correo' error={formik.errors.correo} />
         </div>
         <div className="mb-3">
-          <label className="form-label">Direccion</label>
-          <input type="text" className="form-control" value={formik.values.direccion_residencia}
-            onChange={formik.handleChange} name='direccion_residencia' error={formik.errors.direccion_residencia} placeholder={data.direccion_residencia} />
+          <label className="form-label">Tiempo apadrinando(años)</label>
+          <input type="number" className="form-control" value={formik.values.tiempo_apadrinando}
+            onChange={formik.handleChange} name='tiempo_apadrinando' error={formik.errors.tiempo_apadrinando} />
         </div>
-
+        <div className="mb-3">
+          <label className="form-label">Campo (sector de labora)</label>
+          <input type="text" className="form-control" value={formik.values.campo}
+            onChange={formik.handleChange} name='campo' error={formik.errors.campo} />
+        </div>
 
 
         <div className="modal-footer">
@@ -114,13 +118,14 @@ const initialValues = (nombre) => {
   return {
     nombre: nombre,
     apellido: "",
-    nui: "",
-    fecha_inicio_tratamiento: "",
-    fecha_ingreso: "",
-    seguro_funebre: "",
+    tipo_persona: "",
+    estrato: "",
+    fecha_nacimiento: "",
     telefono: "",
+    direccion: "",
     correo: "",
-    direccion_residencia: "",
+    tiempo_apadrinando: "",
+    campo: "",
   };
 }
 

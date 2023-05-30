@@ -5,7 +5,7 @@ import { BASE_API } from '../../../../utils/constants'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
-export const AddPaciente = ({ props }) => {
+export const AddPaciente = ({ actualizar }) => {
 
   const TOKEN = getToken()
   const MySwal = withReactContent(Swal)
@@ -27,7 +27,7 @@ export const AddPaciente = ({ props }) => {
       fetchData();
 
 
-      props()
+      actualizar()
       MySwal.fire({
         title: <p>Hello World</p>,
         didOpen: () => {
@@ -129,19 +129,16 @@ const initialValues = () => {
   };
 }
 
-const validationSchema = () => {
-  return {
-    nombre: Yup.string(),
-    apellido: Yup.string(),
-    tipo_persona: Yup.string(length = 255),
-    estrato: Yup.number(),
-    fecha_nacimiento: Yup.date(),
-    telefono: Yup.number(),
-    direccion: Yup.string(),
-    correo: Yup.string().email("error en dato"),
-    tiempo_apadrinando: Yup.number(),
-    campo: Yup.string().email("error en dato"),
-
-
-  }
-}
+// const validationSchema = () => {
+//   return {
+//     nombre: Yup.string(),
+//     apellido: Yup.string(),
+//     nui: Yup.number(),
+//     fecha_inicio_tratamiento: Yup.date(),
+//     fecha_ingreso: Yup.date(),
+//     seguro_funebre: Yup.string(),
+//     telefono: Yup.number().max(9999),
+//     correo: Yup.string().email("error en dato"),
+//     direccion_residencia: Yup.string(),
+//   }
+// }

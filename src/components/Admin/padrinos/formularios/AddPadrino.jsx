@@ -5,7 +5,7 @@ import { BASE_API } from '../../../../utils/constants'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
-export const AddPadrino = ({props}) => {
+export const AddPadrino = ({ actualizar }) => {
 
   const TOKEN = getToken()
   const MySwal = withReactContent(Swal)
@@ -28,23 +28,23 @@ export const AddPadrino = ({props}) => {
       };
       fetchData();
 
-   
-        MySwal.fire({
-          title: <p>Hello World</p>,
-          didOpen: () => {
-            // `MySwal` is a subclass of `Swal` with all the same instance & static methods
-            Swal.fire(
-              'Padrino agregado con éxito',
-              '',
-              'success'
-            )
-          },
-        })
-     
-        
-     
 
-      props()
+      MySwal.fire({
+        title: <p>Hello World</p>,
+        didOpen: () => {
+          // `MySwal` is a subclass of `Swal` with all the same instance & static methods
+          Swal.fire(
+            'Padrino agregado con éxito',
+            '',
+            'success'
+          )
+        },
+      })
+
+
+
+
+      actualizar()
 
     }
 
@@ -135,19 +135,19 @@ const initialValues = () => {
   };
 }
 
-const validationSchema = () => {
-  return {
-    nombre: Yup.string(),
-    apellido: Yup.string(),
-    tipo_persona: Yup.string(length = 255),
-    estrato: Yup.number(),
-    fecha_nacimiento: Yup.date(),
-    telefono: Yup.number(),
-    direccion: Yup.string(),
-    correo: Yup.string().email("error en dato"),
-    tiempo_apadrinando: Yup.number(),
-    campo: Yup.string().email("error en dato"),
+// const validationSchema = () => {
+//   return {
+//     nombre: Yup.string(),
+//     apellido: Yup.string(),
+//     tipo_persona: Yup.string(length = 255),
+//     estrato: Yup.number(),
+//     fecha_nacimiento: Yup.date(),
+//     telefono: Yup.number(),
+//     direccion: Yup.string(),
+//     correo: Yup.string().email("error en dato"),
+//     tiempo_apadrinando: Yup.number(),
+//     campo: Yup.string().email("error en dato"),
 
 
-  }
-}
+//   }
+// }
